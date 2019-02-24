@@ -96,10 +96,23 @@ namespace BikeTrafficSimulator.Models
             }
         }
 
+        /// <summary>
+        /// Contains the current position of the biker.
+        /// </summary>
         public decimal Position { get => position; set => Set(() => Position, ref position, value); }
+        /// <summary>
+        /// Contains the current velocity of the biker depending on the maximum velocity and the acceleration.
+        /// </summary>
         public decimal VelocityCurrent { get => velocityCurrent; set => Set(() => VelocityCurrent, ref velocityCurrent, value); }
+        /// <summary>
+        /// States if the biker is currently driving or standing.
+        /// </summary>
         private State StateCurrent { get => stateCurrent; set => Set(() => StateCurrent, ref stateCurrent, value); }
 
+        /// <summary>
+        /// Update the simulation for this biker by calculating a new position and new velocity if the biker currently accelerates.
+        /// </summary>
+        /// <param name="timeStepMin">The next increment in minutes.</param>
         public void UpdatePosition(decimal timeStepMin)
         {
             // Check, if the biker is currently allowed to move at all.
@@ -112,7 +125,7 @@ namespace BikeTrafficSimulator.Models
                 if (VelocityCurrent != VelocityMax)
                 {
                     // v1 = v0 + a*t    (including the conversion to km/h)
-                    VelocityCurrent += (Acceleration * timeStepMin * 3600) / 1000;
+                    VelocityCurrent += (Acceleration * timeStepMin * 60) / 1000;
                     // Check, if the current velocity is larger than the maximum one
                     VelocityCurrent = (VelocityCurrent > VelocityMax) ? VelocityMax : VelocityMax;
                 }
@@ -122,6 +135,10 @@ namespace BikeTrafficSimulator.Models
             }
         }
 
+        /// <summary>
+        /// Commands the biker to stop at a certain position.
+        /// </summary>
+        /// <param name="position"></param>
         public void Stop(decimal position)
         {
             Position = position;
@@ -129,6 +146,9 @@ namespace BikeTrafficSimulator.Models
             VelocityCurrent = 0;
         }
 
+        /// <summary>
+        /// Commands the biker to start driving.
+        /// </summary>
         public void Start()
         {
             StateCurrent = State.Driving;
