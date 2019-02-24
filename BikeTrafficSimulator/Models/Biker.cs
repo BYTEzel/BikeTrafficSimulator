@@ -9,21 +9,21 @@ namespace BikeTrafficSimulator.Models
         private enum State { Driving, Stopped }
         private string name;
         private decimal acceleration;
-        private decimal maximumSpeed;
+        private decimal velocityMax;
         private int recklessness;
         private decimal position;
-        private decimal currentSpeed;
-        private State currentState;
+        private decimal velocityCurrent;
+        private State stateCurrent;
 
         public Biker()
         {
             name = "Biker";
             acceleration = 0.1m;
-            maximumSpeed = 1m;
+            velocityMax = 1m;
             recklessness = 0;
             position = 0;
-            currentSpeed = 0;
-            currentState = State.Stopped;
+            velocityCurrent = 0;
+            stateCurrent = State.Stopped;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace BikeTrafficSimulator.Models
         public string Name { get => name; set => Set(() => Name, ref name, value); }
 
         /// <summary>
-        /// The acceleration of the biker given in km/h.
+        /// The acceleration of the biker given in m/s².
         /// </summary>
         public decimal Acceleration
         {
@@ -51,16 +51,16 @@ namespace BikeTrafficSimulator.Models
         }
 
         /// <summary>
-        /// The maximum speed of the biker given in km/h.
+        /// The maximum velocity of the biker given in km/h.
         /// </summary>
-        public decimal MaximumSpeed
+        public decimal VelocityMax
         {
-            get => maximumSpeed;
+            get => velocityMax;
             set
             {
                 if (value > 0)
                 {
-                    Set(() => MaximumSpeed, ref maximumSpeed, value);
+                    Set(() => VelocityMax, ref velocityMax, value);
                 }
                 else
                 {
@@ -97,12 +97,41 @@ namespace BikeTrafficSimulator.Models
         }
 
         public decimal Position { get => position; set => Set(() => Position, ref position, value); }
-        public decimal CurrentSpeed { get => currentSpeed; set => Set(() => CurrentSpeed, ref currentSpeed, value); }
-        private State CurrentState { get => currentState; set => Set(() => CurrentState, ref currentState, value); }
+        public decimal VelocityCurrent { get => velocityCurrent; set => Set(() => VelocityCurrent, ref velocityCurrent, value); }
+        private State StateCurrent { get => stateCurrent; set => Set(() => StateCurrent, ref stateCurrent, value); }
 
         public void UpdatePosition(decimal timeStepMin)
         {
+            // Check, if the biker is currently allowed to move at all.
+            if (State.Driving == StateCurrent)
+            {
+                // First, update the current speed
+                // For this, store the old speed
+                var VelocityOld = VelocityCurrent;
+                // Calculate the new velocity in case the maximum speed is not yet reached
+                if (VelocityCurrent != VelocityMax)
+                {
+                    // v1 = v0 + a*t    (including the conversion to km/h)
+                    VelocityCurrent += (Acceleration * timeStepMin * 3600) / 1000;
+                    // Check, if the current velocity is larger than the maximum one
+                    VelocityCurrent = (VelocityCurrent > VelocityMax) ? VelocityMax : VelocityMax;
+                }
 
+                // Update the position (s = ((v0+v1)*t) / 2)
+                Position += ((VelocityCurrent + VelocityOld) * timeStepMin) / 2;
+            }
+        }
+
+        public void Stop(decimal position)
+        {
+            Position = position;
+            StateCurrent = State.Stopped;
+            VelocityCurrent = 0;
+        }
+
+        public void Start()
+        {
+            StateCurrent = State.Driving;
         }
     }
 }
