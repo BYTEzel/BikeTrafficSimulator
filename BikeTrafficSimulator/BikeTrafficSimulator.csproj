@@ -124,6 +124,7 @@
     </Compile>
     <Compile Include="Misc\ExceptionCreator.cs" />
     <Compile Include="Models\Biker.cs" />
+    <Compile Include="Models\Track.cs" />
     <Compile Include="Models\TrafficLight.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
