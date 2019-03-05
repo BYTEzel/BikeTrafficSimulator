@@ -78,7 +78,7 @@
                 <Button Style="{StaticResource ButtonAdd}" Command="{Binding AddTrafficLightCommand}"/>
                 <Button Style="{StaticResource ButtonDelete}" Command="{Binding DeleteTrafficLightCommand}"/>
             </StackPanel>
-            <ListBox Grid.Column="1" ItemsSource="{Binding SimulationConfiguration.TrafficLights}" SelectedItem="{Binding CurrentTrafficLight}"/>
+            <ListBox Grid.Column="1" ItemsSource="{Binding SimulationConfiguration.TrafficLights}" SelectedItem="{Binding CurrentTrafficLight, Mode=TwoWay}"/>
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="{StaticResource WidthVariableName}"/>
