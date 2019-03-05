@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using BikeTrafficSimulator.ViewModels;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // Die Elementvorlage "Leere Seite" wird unter https://go.microsoft.com/fwlink/?LinkId=234238 dokumentiert.
 
@@ -25,6 +14,25 @@ namespace BikeTrafficSimulator.Views
         public SimulationView()
         {
             this.InitializeComponent();
+        }
+
+        public void NavigateToSimulationRun()
+        {
+            ViewModelLocator locator = new ViewModelLocator();
+            if (locator.SimulationViewModel.ValidateValues())
+            {
+                this.Frame.Navigate(typeof(SimulationResults));
+            }
+        }
+
+        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            NavigateToSimulationRun();
+        }
+
+        private void TextBox_OnlyNumbers(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
+        {
+            args.Cancel = args.NewText.Any(c => !(char.IsDigit(c) || c==','));
         }
     }
 }

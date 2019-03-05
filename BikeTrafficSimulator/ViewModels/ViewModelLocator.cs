@@ -1,9 +1,7 @@
 ﻿using System;
-using BikeTrafficSimulator.Views;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
-using GalaSoft.MvvmLight.Views;
 
 namespace BikeTrafficSimulator.ViewModels
 {
@@ -24,6 +22,7 @@ namespace BikeTrafficSimulator.ViewModels
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             
             SimpleIoc.Default.Register<SimulationViewModel>();
+            SimpleIoc.Default.Register<SimulationResultViewModel>();
             Messenger.Default.Register<NotificationMessage>(this, NotifyUserMethod);
         }
 
@@ -35,6 +34,11 @@ namespace BikeTrafficSimulator.ViewModels
         public SimulationViewModel SimulationViewModel
         {
             get => ServiceLocator.Current.GetInstance<SimulationViewModel>();
+        }
+
+        public SimulationResultViewModel SimulationResultViewModel
+        {
+            get => ServiceLocator.Current.GetInstance<SimulationResultViewModel>();
         }
     }
 }

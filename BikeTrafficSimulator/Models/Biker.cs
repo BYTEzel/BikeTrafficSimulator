@@ -34,67 +34,18 @@ namespace BikeTrafficSimulator.Models
         /// <summary>
         /// The acceleration of the biker given in m/s².
         /// </summary>
-        public decimal Acceleration
-        {
-            get => acceleration;
-            set
-            {
-                if (value > 0)
-                {
-                    Set(() => Acceleration, ref acceleration, value);
-                }
-                else
-                {
-                    throw ExceptionCreator.GetValueAboveZeroException("Acceleration");
-                }
-            }
-        }
+        public decimal Acceleration { get => acceleration; set => Set(() => Acceleration, ref acceleration, value); }
 
         /// <summary>
         /// The maximum velocity of the biker given in km/h.
         /// </summary>
-        public decimal VelocityMax
-        {
-            get => velocityMax;
-            set
-            {
-                if (value > 0)
-                {
-                    Set(() => VelocityMax, ref velocityMax, value);
-                }
-                else
-                {
-                    throw ExceptionCreator.GetValueAboveZeroException("Maximum speed");
-                }
-            }
-        }
+        public decimal VelocityMax { get => velocityMax; set => Set(() => VelocityMax, ref velocityMax, value); }
 
         /// <summary>
         /// Recklessness is a factor between [0,100] which gives a per cent estimation how likely it
         /// is for the biker to ignore red traffic lights.
         /// </summary>
-        public int Recklessness
-        {
-            get => recklessness;
-            set
-            {
-                if (value >= 0)
-                {
-                    if (value <= 100)
-                    {
-                        Set(() => Recklessness, ref recklessness, value);
-                    }
-                    else
-                    {
-                        throw ExceptionCreator.GetValueBelowException("Recklessness", 100);
-                    }
-                }
-                else
-                {
-                    throw ExceptionCreator.GetValueAboveZeroException("Recklessness");
-                }
-            }
-        }
+        public int Recklessness { get => recklessness; set => Set(() => Recklessness, ref recklessness, value); }
 
         /// <summary>
         /// Contains the current position of the biker.

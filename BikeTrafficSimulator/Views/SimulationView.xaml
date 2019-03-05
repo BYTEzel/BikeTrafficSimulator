@@ -61,8 +61,8 @@
                 <TextBlock Grid.Column="0" Grid.Row="3" Text="Recklessness" Style="{StaticResource TextBlockVariableName}"/>
 
                 <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding CurrentBiker.Name, Mode=TwoWay}" Style="{StaticResource TextBoxValue}" />
-                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding CurrentBiker.Acceleration, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" Style="{StaticResource TextBoxValue}"/>
-                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding CurrentBiker.VelocityMax, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" Style="{StaticResource TextBoxValue}"/>
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding CurrentBiker.Acceleration, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" Style="{StaticResource TextBoxValue}" BeforeTextChanging="TextBox_OnlyNumbers"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding CurrentBiker.VelocityMax, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" Style="{StaticResource TextBoxValue}" BeforeTextChanging="TextBox_OnlyNumbers"/>
                 <Slider Grid.Column="1" Grid.Row="3" Value="{Binding CurrentBiker.Recklessness, Mode=TwoWay}" Minimum="0" Maximum="100" VerticalAlignment="Center"/>
             </Grid>
         </Grid>
@@ -78,7 +78,7 @@
                 <Button Style="{StaticResource ButtonAdd}" Command="{Binding AddTrafficLightCommand}"/>
                 <Button Style="{StaticResource ButtonDelete}" Command="{Binding DeleteTrafficLightCommand}"/>
             </StackPanel>
-            <ListBox Grid.Column="1" ItemsSource="{Binding SimulationConfiguration.TrafficLights}" SelectedItem="{Binding CurrentTrafficLight, Mode=TwoWay}"/>
+            <ListBox Grid.Column="1" ItemsSource="{Binding SimulationConfiguration.TrafficLights}" DisplayMemberPath="Name" SelectedItem="{Binding CurrentTrafficLight, Mode=TwoWay}"/>
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="{StaticResource WidthVariableName}"/>
@@ -90,11 +90,22 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Green time (min)" Style="{StaticResource TextBlockVariableName}"/>
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Red time (min)" Style="{StaticResource TextBlockVariableName}"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CurrentTrafficLight.TimeGreenMin, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" Style="{StaticResource TextBoxValue}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CurrentTrafficLight.TimeRedMin, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" Style="{StaticResource TextBoxValue}"/>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" Style="{StaticResource TextBlockVariableName}"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Green time (min)" Style="{StaticResource TextBlockVariableName}"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Red time (min)" Style="{StaticResource TextBlockVariableName}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CurrentTrafficLight.Name, Mode=TwoWay}" Style="{StaticResource TextBoxValue}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CurrentTrafficLight.TimeGreenMin, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" Style="{StaticResource TextBoxValue}" BeforeTextChanging="TextBox_OnlyNumbers"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CurrentTrafficLight.TimeRedMin, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" Style="{StaticResource TextBoxValue}" BeforeTextChanging="TextBox_OnlyNumbers"/>
             </Grid>
+        </Grid>
+
+        <Grid Grid.Row="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="{Binding Messages, Mode=OneWay}" VerticalAlignment="Center" Foreground="Purple" FontStyle="Oblique"/>
+            <Button Grid.Column="1" Height="50" Content="START SIMULATION" Margin="20" HorizontalAlignment="Right" Click="Button_Click" />
         </Grid>
     </Grid>
 </Page>

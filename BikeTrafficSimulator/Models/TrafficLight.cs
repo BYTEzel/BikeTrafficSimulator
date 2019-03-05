@@ -7,6 +7,7 @@ namespace BikeTrafficSimulator.Models
     {
         public enum State { Green, Red};
         private State currentState;
+        private string name;
         private decimal timeGreenMin;
         private decimal timeRedMin;
         private decimal timeElapsed;
@@ -28,6 +29,7 @@ namespace BikeTrafficSimulator.Models
         /// This variable contains the position of the traffic light on the track.
         /// </summary>
         public decimal Position { get => position; set => Set(() => Position, ref position, value); }
+        public string Name { get => name; set => Set(() => Name, ref name, value); }
 
         public TrafficLight()
         {
