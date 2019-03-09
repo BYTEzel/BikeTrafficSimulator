@@ -25,10 +25,12 @@
         </Grid.RowDefinitions>
         
         <TextBlock Grid.Row="0" Text="{Binding Title}" Style="{StaticResource TitleBox}"/>
-        <TextBlock Grid.Row="1" Text="Track" Style="{StaticResource SubtitleBox}"/>
+        <TextBlock Grid.Row="1" Text="Track and simulation settings" Style="{StaticResource SubtitleBox}"/>
         <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
             <TextBlock Text="Length (km)" Margin="10"/>
-            <TextBox Text="{Binding SimulationConfiguration.Track.LengthKm, Mode=TwoWay}" Width="200" Style="{StaticResource TextBoxValue}"/>
+            <TextBox Text="{Binding SimulationConfiguration.Track.LengthKm, Mode=TwoWay}" Width="200" Style="{StaticResource TextBoxValue}" BeforeTextChanging="TextBox_OnlyNumbers"/>
+            <TextBlock Text="Step size (min)" Margin="30, 10, 10, 10"/>
+            <TextBox Text="{Binding SimulationConfiguration.TimeStepMin, Mode=TwoWay}" Width="200" Style="{StaticResource TextBoxValue}" BeforeTextChanging="TextBox_OnlyNumbers"/>
         </StackPanel>
         
         
@@ -93,9 +95,11 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" Style="{StaticResource TextBlockVariableName}"/>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Green time (min)" Style="{StaticResource TextBlockVariableName}"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Red time (min)" Style="{StaticResource TextBlockVariableName}"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Position (km)" Style="{StaticResource TextBlockVariableName}"/>
                 <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CurrentTrafficLight.Name, Mode=TwoWay}" Style="{StaticResource TextBoxValue}"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CurrentTrafficLight.TimeGreenMin, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" Style="{StaticResource TextBoxValue}" BeforeTextChanging="TextBox_OnlyNumbers"/>
                 <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CurrentTrafficLight.TimeRedMin, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" Style="{StaticResource TextBoxValue}" BeforeTextChanging="TextBox_OnlyNumbers"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CurrentTrafficLight.Position, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" Style="{StaticResource TextBoxValue}" BeforeTextChanging="TextBox_OnlyNumbers"/>
             </Grid>
         </Grid>
 

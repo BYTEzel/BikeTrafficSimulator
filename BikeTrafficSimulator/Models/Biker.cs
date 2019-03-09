@@ -23,7 +23,7 @@ namespace BikeTrafficSimulator.Models
             recklessness = 0;
             position = 0;
             velocityCurrent = 0;
-            stateCurrent = State.Stopped;
+            stateCurrent = State.Driving;
         }
 
         /// <summary>
@@ -103,6 +103,11 @@ namespace BikeTrafficSimulator.Models
         public void Start()
         {
             StateCurrent = State.Driving;
+        }
+
+        public Biker DeepCopy()
+        {
+            return (Biker)MemberwiseClone();
         }
     }
 }

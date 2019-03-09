@@ -8,8 +8,32 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid DataContext="{Binding Source={StaticResource Locator}, Path=SimulationViewModel}">
-        <TextBlock Text="{Binding Title}"/>
+    <Grid DataContext="{Binding Source={StaticResource Locator}, Path=SimulationResultViewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="{Binding Title}" Style="{StaticResource TitleBox}" />
+        <ListView Grid.Row="1" ItemsSource="{Binding SimulationCurrent.Bikers}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:SimulationResults">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" Margin="0,0,10,0" Width="200"/>
+                        <TextBlock Text="{Binding Position}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid Grid.Row="3" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Simulation time" Style="{StaticResource TextBlockVariableName}" HorizontalAlignment="Center"/>
+            <Slider Grid.Column="1" Minimum="0" Maximum="{Binding MaxIteration}" Value="{Binding IterationCurrent, Mode=TwoWay}"  Margin="10" />
+        </Grid>
 
     </Grid>
 </Page>

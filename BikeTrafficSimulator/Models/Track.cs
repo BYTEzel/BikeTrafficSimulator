@@ -23,5 +23,10 @@ namespace BikeTrafficSimulator.Models
                 throw ExceptionCreator.GetValueAboveZeroException("Track length");
             }
         }
+
+        public Track DeepCopy()
+        {
+            return (Track)MemberwiseClone();
+        }
     }
 }

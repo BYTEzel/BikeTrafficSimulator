@@ -61,5 +61,10 @@ namespace BikeTrafficSimulator.Models
                     throw new NotImplementedException("Invalid traffic light state.");
             }
         }
+
+        public TrafficLight DeepCopy()
+        {
+            return (TrafficLight)MemberwiseClone();
+        }
     }
 }

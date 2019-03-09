@@ -83,5 +83,27 @@ namespace BikeTrafficSimulator.Models
             }
             return true;            
         }
+
+        public Simulation DeepCopy()
+        {
+            Simulation sim = new Simulation();
+
+            // Clone each self-defined object type
+            sim.Track = Track.DeepCopy();
+
+            // Clone all bikers
+            for (int i=0;i<Bikers.Count;i++)
+            {
+                sim.Bikers.Add(Bikers[i].DeepCopy());
+            }
+
+            // Clone all traffic lights
+            foreach (TrafficLight tl in TrafficLights)
+            {
+                sim.TrafficLights.Add(tl.DeepCopy());
+            }
+
+            return sim;
+        }
     }
 }
