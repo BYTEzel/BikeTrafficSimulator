@@ -36,6 +36,7 @@ namespace BikeTrafficSimulator.Models
             // Start with a random state (red/green)
             Random rand = new Random();
             CurrentState = (rand.Next(0, 1) > 0) ? State.Green : State.Red;
+            timeElapsed = 0;
         }
 
         /// <summary>
@@ -50,12 +51,18 @@ namespace BikeTrafficSimulator.Models
             switch (CurrentState)
             {
                 case State.Green:
-                    CurrentState = (timeElapsed >= timeGreenMin) ? State.Red : State.Green;
-                    timeElapsed = 0;
+                    if (timeElapsed >= timeGreenMin)
+                    {
+                        CurrentState = State.Red;
+                        timeElapsed = 0;
+                    }
                     break;
                 case State.Red:
-                    CurrentState = (timeElapsed >= timeRedMin) ? State.Green : State.Red;
-                    timeElapsed = 0;
+                    if (timeElapsed >= timeRedMin)
+                    {
+                        CurrentState = State.Green;
+                        timeElapsed = 0;
+                    }
                     break;
                 default:
                     throw new NotImplementedException("Invalid traffic light state.");

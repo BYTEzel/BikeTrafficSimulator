@@ -1,6 +1,7 @@
 ﻿using BikeTrafficSimulator.Misc;
 using GalaSoft.MvvmLight;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace BikeTrafficSimulator.Models
@@ -52,14 +53,20 @@ namespace BikeTrafficSimulator.Models
             }
 
             // Store the state of all bikers before and after the iteration to check for traffic lights in between the iteration.
-            ObservableCollection<Biker> bikersOld = Bikers;
+            // For this, create a deep copy
+            List<decimal> positionsOld = new List<decimal>();
+            foreach (Biker b in Bikers)
+            {
+                positionsOld.Add(b.Position);
+            }
+
             for (int i = 0; i < Bikers.Count; i++)
             {
                 Bikers[i].UpdatePosition(TimeStepMin);
                 for (int j = 0; j < TrafficLights.Count; j++)
                 {
                     // Check if the bike crossed a traffic light during the last iteration
-                    if ((bikersOld[i].Position < TrafficLights[j].Position) && (Bikers[i].Position > TrafficLights[j].Position))
+                    if ((positionsOld[i] < TrafficLights[j].Position) && (Bikers[i].Position > TrafficLights[j].Position))
                     {
                         if (TrafficLight.State.Green == TrafficLights[j].CurrentState)
                         {
@@ -72,6 +79,15 @@ namespace BikeTrafficSimulator.Models
                             {
                                 Bikers[i].Stop(TrafficLights[j].Position);
                             }
+                        }
+                    }
+
+                    // Check, if the traffic light on which the biker is standing switched to green
+                    if (Bikers[i].Position == TrafficLights[j].Position)
+                    {
+                        if (TrafficLight.State.Green == TrafficLights[j].CurrentState)
+                        {
+                            Bikers[i].Start();
                         }
                     }
                 }
