@@ -11,6 +11,7 @@ namespace BikeTrafficSimulator.ViewModels
         private Simulation simulationCurrent;
         private int iterationCurrent;
         private int maxIteration;
+        private decimal currentTime;
 
         public SimulationResultViewModel()
         {
@@ -40,9 +41,14 @@ namespace BikeTrafficSimulator.ViewModels
             {
                 Set(() => IterationCurrent, ref iterationCurrent, value);
                 if (simulationRuns != null)
-                    SimulationCurrent = simulationRuns[IterationCurrent];
+                {
+                    SimulationCurrent = simulationRuns[value];
+                    CurrentTime = value * simulationRuns[0].TimeStepMin;
+                }
             }
         }
+
         public int MaxIteration { get => maxIteration; }
+        public decimal CurrentTime { get => currentTime; set => Set(() => CurrentTime, ref currentTime, value); }
     }
 }

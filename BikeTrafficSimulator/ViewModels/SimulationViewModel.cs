@@ -1,10 +1,8 @@
 ﻿using BikeTrafficSimulator.Models;
-using BikeTrafficSimulator.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Windows.Input;
-using Windows.UI.Xaml.Controls;
 
 namespace BikeTrafficSimulator.ViewModels
 {
@@ -51,12 +49,6 @@ namespace BikeTrafficSimulator.ViewModels
                 Messages += "Please create at least one biker.\n";
             }
 
-            if (SimulationConfiguration.TrafficLights.Count <= 0)
-            {
-                checkOk = false;
-                Messages += "Please create at least one traffic light.\n";
-            }
-
             foreach (Biker biker in SimulationConfiguration.Bikers)
             {
                 if (biker.Acceleration <= 0)
@@ -97,7 +89,7 @@ namespace BikeTrafficSimulator.ViewModels
         private void AddTrafficLight()
         {
             Random random = new Random();
-            SimulationConfiguration.TrafficLights.Add(new TrafficLight() { Name = "Anonymus traffic light", TimeGreenMin = 10m, TimeRedMin = 2m, Position = ((decimal)random.NextDouble())*SimulationConfiguration.Track.LengthKm });
+            SimulationConfiguration.TrafficLights.Add(new TrafficLight() { Name = "Anonymus traffic light", TimeGreenMin = 1m, TimeRedMin = 0.2m, Position = ((decimal)random.NextDouble())*SimulationConfiguration.Track.LengthKm });
         }
 
         private void DeleteBiker()

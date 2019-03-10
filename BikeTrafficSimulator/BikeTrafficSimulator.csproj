@@ -123,7 +123,9 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Misc\DecimalConverter.cs" />
+    <Compile Include="Misc\DecimalToDoubleConverter.cs" />
     <Compile Include="Misc\ExceptionCreator.cs" />
+    <Compile Include="Misc\MinToTimeConverter.cs" />
     <Compile Include="Models\Biker.cs" />
     <Compile Include="Models\Simulation.cs" />
     <Compile Include="Models\Track.cs" />

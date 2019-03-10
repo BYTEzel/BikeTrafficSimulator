@@ -13,7 +13,7 @@ namespace BikeTrafficSimulator.Views
     {
         public SimulationView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public void NavigateToSimulationRun()
@@ -21,7 +21,7 @@ namespace BikeTrafficSimulator.Views
             ViewModelLocator locator = new ViewModelLocator();
             if (locator.SimulationViewModel.ValidateValues())
             {
-                this.Frame.Navigate(typeof(SimulationResults));
+                Frame.Navigate(typeof(SimulationResults));
             }
         }
 

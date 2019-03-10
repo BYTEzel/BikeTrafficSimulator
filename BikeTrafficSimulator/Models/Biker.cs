@@ -18,8 +18,8 @@ namespace BikeTrafficSimulator.Models
         public Biker()
         {
             name = "Biker";
-            acceleration = 0.1m;
-            velocityMax = 1m;
+            acceleration = 1m;
+            velocityMax = 15m;
             recklessness = 0;
             position = 0;
             velocityCurrent = 0;
@@ -82,7 +82,7 @@ namespace BikeTrafficSimulator.Models
                 }
 
                 // Update the position (s = ((v0+v1)*t) / 2)
-                Position += ((VelocityCurrent + VelocityOld) * timeStepMin) / 2;
+                Position += ((VelocityCurrent + VelocityOld) * timeStepMin) / (2*60);
             }
         }
 

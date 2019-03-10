@@ -28,9 +28,9 @@
         <TextBlock Grid.Row="1" Text="Track and simulation settings" Style="{StaticResource SubtitleBox}"/>
         <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
             <TextBlock Text="Length (km)" Margin="10"/>
-            <TextBox Text="{Binding SimulationConfiguration.Track.LengthKm, Mode=TwoWay}" Width="200" Style="{StaticResource TextBoxValue}" BeforeTextChanging="TextBox_OnlyNumbers"/>
+            <TextBox Text="{Binding SimulationConfiguration.Track.LengthKm, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" Width="200" Style="{StaticResource TextBoxValue}" BeforeTextChanging="TextBox_OnlyNumbers"/>
             <TextBlock Text="Step size (min)" Margin="30, 10, 10, 10"/>
-            <TextBox Text="{Binding SimulationConfiguration.TimeStepMin, Mode=TwoWay}" Width="200" Style="{StaticResource TextBoxValue}" BeforeTextChanging="TextBox_OnlyNumbers"/>
+            <TextBox Text="{Binding SimulationConfiguration.TimeStepMin, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" Width="200" Style="{StaticResource TextBoxValue}" BeforeTextChanging="TextBox_OnlyNumbers"/>
         </StackPanel>
         
         

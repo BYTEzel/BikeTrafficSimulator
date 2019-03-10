@@ -15,6 +15,10 @@ namespace BikeTrafficSimulator.Models
         public ObservableCollection<Biker> Bikers { get => bikers; set => Set(() => Bikers, ref bikers, value); }
         public ObservableCollection<TrafficLight> TrafficLights { get => trafficLights; set => Set(() => TrafficLights, ref trafficLights, value); }
         public Track Track { get => track; set => Set(() => Track, ref track, value); }
+
+        /// <summary>
+        /// Gives the (time) step size of the simulation.
+        /// </summary>
         public decimal TimeStepMin
         {
             get => timeStepMin;
@@ -89,6 +93,7 @@ namespace BikeTrafficSimulator.Models
             Simulation sim = new Simulation();
 
             // Clone each self-defined object type
+            sim.TimeStepMin = TimeStepMin;
             sim.Track = Track.DeepCopy();
 
             // Clone all bikers
