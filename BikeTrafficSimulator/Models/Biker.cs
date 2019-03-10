@@ -6,7 +6,7 @@ namespace BikeTrafficSimulator.Models
 {
     public class Biker : ObservableObject
     {
-        private enum State { Driving, Stopped }
+        public enum State { Driving, Stopped }
         private string name;
         private decimal acceleration;
         private decimal velocityMax;
@@ -58,7 +58,7 @@ namespace BikeTrafficSimulator.Models
         /// <summary>
         /// States if the biker is currently driving or standing.
         /// </summary>
-        private State StateCurrent { get => stateCurrent; set => Set(() => StateCurrent, ref stateCurrent, value); }
+        public State StateCurrent { get => stateCurrent; set => Set(() => StateCurrent, ref stateCurrent, value); }
 
         /// <summary>
         /// Update the simulation for this biker by calculating a new position and new velocity if the biker currently accelerates.
