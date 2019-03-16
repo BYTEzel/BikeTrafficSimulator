@@ -127,6 +127,7 @@
     <Compile Include="Misc\DecimalToDoubleConverter.cs" />
     <Compile Include="Misc\ExceptionCreator.cs" />
     <Compile Include="Misc\MinToTimeConverter.cs" />
+    <Compile Include="Misc\RoundDecimalConverter.cs" />
     <Compile Include="Models\Biker.cs" />
     <Compile Include="Models\Simulation.cs" />
     <Compile Include="Models\Track.cs" />

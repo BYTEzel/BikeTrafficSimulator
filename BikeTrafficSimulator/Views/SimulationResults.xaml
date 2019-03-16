@@ -12,6 +12,7 @@
         <conv:MinToTimeConverter x:Key="MinToTimeConverter" />
         <conv:DecimalToDoubleConverter x:Key="DecimalToDoubleConverter" />
         <conv:BikerStateToColor x:Key="BikerStateToColor"/>
+        <conv:RoundDecimalConverter x:Key="RoundDecimalConverter"/>
         <Style x:Key="ListViewStyle" TargetType="ListView">
             <Setter Property="IsTabStop" Value="False"/>
             <Setter Property="TabNavigation" Value="Once"/>
@@ -70,10 +71,12 @@
                 <DataTemplate x:DataType="local:SimulationResults">
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
                             <ColumnDefinition Width="300"/>
                             <ColumnDefinition Width="600"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                        <Image Source="/Assets/bike.svg" Style="{StaticResource IconImage}"/>
+                        <StackPanel Orientation="Vertical" Grid.Column="1">
                             <TextBlock Text="{Binding Name}" FontSize="18"/>
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -85,12 +88,12 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Position (km)"/>
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Position}"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Position, Converter={StaticResource RoundDecimalConverter}}"/>
                                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Current speed (km/h)"/>
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding VelocityCurrent}"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding VelocityCurrent, Converter={StaticResource RoundDecimalConverter}}"/>
                             </Grid>
                         </StackPanel>
-                        <Grid Background="{Binding StateCurrent, Converter={StaticResource BikerStateToColor}}" Grid.Column="1" VerticalAlignment="Center">
+                        <Grid Background="{Binding StateCurrent, Converter={StaticResource BikerStateToColor}}" Grid.Column="2" VerticalAlignment="Center">
                             <Slider 
                                     Minimum="0" 
                                     Maximum="{Binding ElementName=MainGrid, Path=DataContext.SimulationCurrent.Track.LengthKm, Converter={StaticResource DecimalToDoubleConverter}}" 
