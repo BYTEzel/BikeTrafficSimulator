@@ -89,7 +89,7 @@ namespace BikeTrafficSimulator.ViewModels
         private void AddTrafficLight()
         {
             Random random = new Random();
-            SimulationConfiguration.TrafficLights.Add(new TrafficLight() { Name = "Anonymus traffic light", TimeGreenMin = 1m, TimeRedMin = 0.2m, Position = ((decimal)random.NextDouble())*SimulationConfiguration.Track.LengthKm });
+            SimulationConfiguration.TrafficLights.Add(new TrafficLight() { Name = "Anonymus traffic light", TimeGreenMin = 1m, TimeRedMin = 0.2m, Position = (Math.Round(((decimal)random.NextDouble())*SimulationConfiguration.Track.LengthKm,2)) });
         }
 
         private void DeleteBiker()

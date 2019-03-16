@@ -16,7 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.5*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
@@ -25,16 +25,21 @@
         </Grid.RowDefinitions>
         
         <TextBlock Grid.Row="0" Text="{Binding Title}" Style="{StaticResource TitleBox}"/>
-        <TextBlock Grid.Row="1" Text="Track and simulation settings" Style="{StaticResource SubtitleBox}"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Image Source="/Assets/track.svg" Style="{StaticResource IconImage}"/>
+            <TextBlock Text="Track and simulation settings" Style="{StaticResource SubtitleBox}"/>
+        </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
             <TextBlock Text="Length (km)" Margin="10"/>
             <TextBox Text="{Binding SimulationConfiguration.Track.LengthKm, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" Width="200" Style="{StaticResource TextBoxValue}" BeforeTextChanging="TextBox_OnlyNumbers"/>
             <TextBlock Text="Step size (min)" Margin="30, 10, 10, 10"/>
             <TextBox Text="{Binding SimulationConfiguration.TimeStepMin, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" Width="200" Style="{StaticResource TextBoxValue}" BeforeTextChanging="TextBox_OnlyNumbers"/>
         </StackPanel>
-        
-        
-        <TextBlock Grid.Row="3" Text="Biker" Style="{StaticResource SubtitleBox}"/>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <Image Source="/Assets/bike.svg" Style="{StaticResource IconImage}"/>
+            <TextBlock Text="Biker" Style="{StaticResource SubtitleBox}"/>
+        </StackPanel>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="60"/>
@@ -68,8 +73,11 @@
                 <Slider Grid.Column="1" Grid.Row="3" Value="{Binding CurrentBiker.Recklessness, Mode=TwoWay}" Minimum="0" Maximum="100" VerticalAlignment="Center"/>
             </Grid>
         </Grid>
-        
-        <TextBlock Grid.Row="5" Text="Traffic lights" Style="{StaticResource SubtitleBox}"/>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal">
+            <Image Source="/Assets/trafficLight.svg" Style="{StaticResource IconImage}"/>
+            <TextBlock Text="Traffic lights" Style="{StaticResource SubtitleBox}"/>
+        </StackPanel>
         <Grid Grid.Row="6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="60"/>

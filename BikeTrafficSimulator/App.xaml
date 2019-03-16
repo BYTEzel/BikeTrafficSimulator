@@ -8,6 +8,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <vm:ViewModelLocator x:Key="Locator"/>
+
+            <Style TargetType="Image" x:Key="IconImage">
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="Width" Value="50"/>
+                <Setter Property="Margin" Value="10"/>
+            </Style>
             
             <Style TargetType="TextBlock" x:Key="TitleBox">
                 <Setter Property="FontSize" Value="60"/>
