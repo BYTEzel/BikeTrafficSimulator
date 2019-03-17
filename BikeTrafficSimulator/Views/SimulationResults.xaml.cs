@@ -1,6 +1,7 @@
 ﻿using BikeTrafficSimulator.Models;
 using BikeTrafficSimulator.ViewModels;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // Die Elementvorlage "Leere Seite" wird unter https://go.microsoft.com/fwlink/?LinkId=234238 dokumentiert.
@@ -29,7 +30,7 @@ namespace BikeTrafficSimulator.Views
 
         private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(SimulationView), locator.SimulationResultViewModel.SimulationConfiguration);
+            Frame.Navigate(typeof(SimulationView), locator.SimulationResultViewModel.SimulationConfiguration, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
         }
     }
 }
