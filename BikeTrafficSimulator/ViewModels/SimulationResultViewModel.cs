@@ -12,13 +12,18 @@ namespace BikeTrafficSimulator.ViewModels
         private int iterationCurrent;
         private int maxIteration;
         private decimal currentTime;
+        public Simulation SimulationConfiguration;
 
         public SimulationResultViewModel()
         {
             Title = "Simulation Results";
+            IterationCurrent = 0;            
+        }
+
+        public void computeSimulationResults()
+        {
             IterationCurrent = 0;
-            ViewModelLocator locator = new ViewModelLocator();
-            var simulationCurrentRun = locator.SimulationViewModel.SimulationConfiguration;
+            var simulationCurrentRun = SimulationConfiguration.DeepCopy();
 
             simulationRuns = new ObservableCollection<Simulation>();
             do
@@ -27,7 +32,7 @@ namespace BikeTrafficSimulator.ViewModels
             } while (!simulationCurrentRun.UpdateSimulation());
 
             // Store the number of iterations the simulation needed to finish
-            maxIteration = simulationRuns.Count-1;
+            maxIteration = simulationRuns.Count - 1;
 
             SimulationCurrent = simulationRuns[IterationCurrent];
         }
