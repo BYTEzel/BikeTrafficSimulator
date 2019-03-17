@@ -13,6 +13,7 @@
         <conv:DecimalToDoubleConverter x:Key="DecimalToDoubleConverter" />
         <conv:BikerStateToColor x:Key="BikerStateToColor"/>
         <conv:RoundDecimalConverter x:Key="RoundDecimalConverter"/>
+        <conv:TrafficLightStateToColor x:Key="TrafficLightConverter"/>
         <Style x:Key="ListViewStyle" TargetType="ListView">
             <Setter Property="AllowDrop" Value="False"/>
             <Setter Property="IsTabStop" Value="False"/>
@@ -96,6 +97,45 @@
                             </Grid>
                         </StackPanel>
                         <Grid Background="{Binding StateCurrent, Converter={StaticResource BikerStateToColor}}" Grid.Column="2" VerticalAlignment="Center">
+                            <Slider 
+                                    Minimum="0" 
+                                    Maximum="{Binding ElementName=MainGrid, Path=DataContext.SimulationCurrent.Track.LengthKm, Converter={StaticResource DecimalToDoubleConverter}}" 
+                                    Value="{Binding Position, Converter={StaticResource DecimalToDoubleConverter}}"
+                                    IsEnabled="False"
+                                    Margin="10"
+                                />
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView Style="{StaticResource ListViewStyle}" Grid.Row="2" ItemsSource="{Binding SimulationCurrent.TrafficLights}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:SimulationResults">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="600"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/Assets/trafficLight.svg" Style="{StaticResource IconImage}"/>
+                        <StackPanel Orientation="Vertical" Grid.Column="1">
+                            <TextBlock Text="{Binding Name}" FontSize="18"/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Position (km)"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Position, Converter={StaticResource RoundDecimalConverter}}"/>
+                            </Grid>
+                        </StackPanel>
+                        <Grid Background="{Binding CurrentState, Converter={StaticResource TrafficLightConverter}}" Grid.Column="2" VerticalAlignment="Center">
                             <Slider 
                                     Minimum="0" 
                                     Maximum="{Binding ElementName=MainGrid, Path=DataContext.SimulationCurrent.Track.LengthKm, Converter={StaticResource DecimalToDoubleConverter}}" 
