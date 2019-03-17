@@ -38,7 +38,7 @@ namespace BikeTrafficSimulator.Views
 
         private void TextBox_OnlyNumbers(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
         {
-            args.Cancel = args.NewText.Any(c => !(char.IsDigit(c) || c==','));
+            args.Cancel = args.NewText.Any(c => !(char.IsDigit(c) || c=='.'));
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
